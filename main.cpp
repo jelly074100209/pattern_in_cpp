@@ -18,7 +18,7 @@
 
 #include "pattern/builder/Builder.h"
 #include "pattern/builder/BuilderA.h"
-#include "pattern/builder/director.h"
+#include "pattern/builder/Director.h"
 
 #include "pattern/factory_method/database.h"
 #include "pattern/factory_method/DB.h"
@@ -37,6 +37,10 @@
 
 #include "pattern/composite/Composite.h"
 #include "pattern/composite/Leaf.h"
+
+#include "pattern/decorator/Phone.h"
+#include "pattern/decorator/NokiaPhone.h"
+#include "pattern/decorator/DecoratorPhoneA.h"
 
 using namespace std;
 
@@ -173,6 +177,11 @@ int main() {
 	pRoot->Add(pCom);
 	pRoot->Operation();
 
+	delete pLeaf1;
+	delete pLeaf2;
+	delete pCom;
+	delete pRoot;
+
 	/**
 	 * 装饰模式
 	 * 动态地给一个对象添加一些额外的职责。就增加功能来说，Decorator模式相比生成子类更为灵活
@@ -182,7 +191,11 @@ int main() {
 	 * 当不能采用生成子类的方法进行扩充时。一种情况是，可能有大量独立的扩展，为支持每一种组合将产生大量的子类，
 	 * 使得子类数目呈爆炸性增长。另一种情况可能是因为类定义被隐藏，或 类定义不能用于生成子类。
 	 */
-
+	Phone *phone = new NokiaPhone("lumia 925");
+	Phone *dpa = new DecoratorPhoneA(phone);
+	dpa->ShowDecorate();
+	delete dpa;
+	delete phone;
 	return 0;
 }
 
