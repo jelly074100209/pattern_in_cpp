@@ -44,6 +44,15 @@
 
 #include "pattern/facade/Facade.h"
 
+#include "pattern/flyweight/FlyweightFactory.h"
+#include "pattern/flyweight/Flyweight.h"
+
+#include "pattern/proxy/Proxy.h"
+#include "pattern/proxy/Subject.h"
+
+#include "pattern/responsibility_chain/ConcreteHandler1.h"
+#include "pattern/responsibility_chain/ConcreteHandler2.h"
+
 using namespace std;
 
 /**
@@ -216,6 +225,62 @@ int main() {
 	Facade facade;
 	facade.MethodA();
 	facade.MethodB();
+
+	/**
+	 * 享元模式
+	 * 运用共享技术有效地支持大量细粒度的对象
+	 * 适用性
+	 *   一个应用程序使用了大量的对象
+	 *   完全由于使用大量的对象，造成很大的存储开销
+	 *   对象的大多数状态都可变为外部状态
+	 *   如果删除对象的外部状态，那么可以用相对较少的共享对象取代很多组对象
+	 *   应用程序不依赖对象标识。由于Flyweight对象可以被共享，对于概念上明显有别的对象，标识测试将返回真值
+	 */
+
+	FlyweightFactory *flyweight_factory = new FlyweightFactory();
+	Flyweight *flyWeight = flyweight_factory->GetFlyWeight(1);
+	flyWeight->operation();
+	cout<<"flyweight size is: "<<flyweight_factory->size()<<endl;
+	delete flyweight_factory;
+
+	/**
+	 * 代理模式
+	 * 为其他对象提供一种代理以控制对这个对象的访问
+	 * 适用性
+	 *   远程代理 为一个对象在不同地址空间提供局部代表
+	 *   虚代理  根据需要创建开销很大的对象
+	 *   保护代理 控制对原始对象的访问。保护代理用于对象应该有不同的访问权限的时候。
+	 *   智能指引 取代了简单的指针，它在访问对象时执行一些附加操作。它的典型用途包括
+	 *   	（对指向实际对象的引用计数，这样当该对象没有引用时，可以自动翻译它）
+	 *   	（当第一次引用一个持久对象时，将它装入内存）
+	 *   	（在访问一个实际对象前，检查是否已经锁定了它，以确保其他对象不能改变它）
+	 */
+
+	Subject *pSubject = new Proxy();
+	pSubject->Request();
+	delete pSubject;
+
+	/**
+	 * 职责链模式
+	 * 使多个对象都有机会处理请求，从而避免请求的发送者和接收者之间的耦合关系。将这些对象连成一条链，并沿着这条链传递该请求，直到有一个对象处理它为止。
+	 * 适用性
+	 *   有多个对象可以处理这一请求，哪个对象处理该请求运行时刻自动确定
+	 *   你想在不明确指定接收者的情况下，向多个对象中的一个提交一个请求
+	 *   可处理一个请求的对象集合应被动态指定
+	 */
+	ConcreteHandler2 *handler2 = new ConcreteHandler2(0);
+	ConcreteHandler1 *handler1 = new ConcreteHandler1(handler2);
+	handler1->HandlerRequest();
+
+	/**
+	 * 命令模式
+	 * 将一个请求封闭为一个对象，从而使你可用不同的请求对客户进行参数化；对请求排队或记录请求日志，以及支持可撤消操作
+	 * 适用性
+	 *   抽象出待执行的动作以参数化某对象。Command模式是回调机制的一个面向对象的替代品
+	 *   在不同的时刻指定、排列和执行请求。
+	 *   支持取消操作
+	 *   支持个性日志，这样当系统崩溃时，这些修改可以被重做一遍
+	 */
 
 	return 0;
 }
