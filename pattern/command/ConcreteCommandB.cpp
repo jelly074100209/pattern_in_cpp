@@ -1,7 +1,7 @@
 /*
  * ConcreteCommandB.cpp
  *
- *  Created on: 2016年10月21日
+ *  Created on: 2016骞�10鏈�21鏃�
  *      Author: JSS
  */
 
@@ -12,10 +12,15 @@ ConcreteCommandB::ConcreteCommandB() {
 
 }
 
-ConcreteCommandB::~ConcreteCommandB() {
-	// TODO Auto-generated destructor stub
+ConcreteCommandB::ConcreteCommandB(Receiver* pReceiver) {
+	this->_recv = pReceiver;
 }
 
-void ConcreteCommandA::Execute() {
+ConcreteCommandB::~ConcreteCommandB() {
+	// TODO Auto-generated destructor stub
+	delete _recv;
+}
 
+void ConcreteCommandB::Execute() {
+	this->_recv->executeCommandB();
 }
