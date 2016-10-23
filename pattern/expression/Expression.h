@@ -8,15 +8,13 @@
 #ifndef PATTERN_EXPRESSION_EXPRESSION_H_
 #define PATTERN_EXPRESSION_EXPRESSION_H_
 
-#include <iostream>
-#include <string>
-using namespace std;
+#include "Context.h"
 
 class Expression {
 public:
 	Expression();
 	virtual ~Expression();
-	virtual bool interpret(string context) = 0;
+	virtual int interpret(Context* context) = 0;
 };
 
 #endif /* PATTERN_EXPRESSION_EXPRESSION_H_ */

@@ -7,20 +7,16 @@
 
 #include "TerminalExpression.h"
 
-TerminalExpression::TerminalExpression(string data) {
+TerminalExpression::TerminalExpression(int i) {
 	// TODO Auto-generated constructor stub
-	this->data = data;
+	this->i = i;
 }
 
 TerminalExpression::~TerminalExpression() {
 	// TODO Auto-generated destructor stub
 }
 
-bool TerminalExpression::TerminalExpression(string context) {
-	if (context.find(data)) {
-		return true;
-	} else {
-		return false;
-	}
+int TerminalExpression::interpret(Context* context) {
+	return this->i;
 }
 

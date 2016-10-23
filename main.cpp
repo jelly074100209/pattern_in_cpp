@@ -58,6 +58,14 @@
 #include "pattern/command/ConcreteCommandB.h"
 #include "pattern/command/Receiver.h"
 
+#include "pattern/expression/Context.h"
+#include "pattern/expression/SubtractNonterminalExpression.h"
+#include "pattern/expression/AddNorterminalExpression.h"
+#include "pattern/expression/TerminalExpression.h"
+
+#include "pattern/iterator/Iterator.h"
+#include "pattern/iterator/ConcreteAggregate.h"
+
 using namespace std;
 
 /**
@@ -304,6 +312,43 @@ int main() {
 	 *   	效率不是一个关键问题最高效的解释器通常不是通过直接解释语法分析树实现的，而是首先将它们转换成另一种形式。例如，正则表达式通常被
 	 *   	转换成状态机。但即使在这种情况下，转换器仍可用解释器模式实现，该模式仍是有用的。
 	 */
+	Context *context = new Context();
+	context->addValue("a", 7);
+	context->addValue("b", 8);
+	context->addValue("c", 2);
+	SubtractNonterminalExpression *subtractValue = new SubtractNonterminalExpression(new TerminalExpression(
+	        context->getValue("a")), new TerminalExpression(context->getValue("b")));
+
+	AddNorterminalExpression *addValue = new AddNorterminalExpression(subtractValue, new TerminalExpression(
+	        context->getValue("c")));
+
+	cout<< addValue->interpret(context);
+
+	/**
+	 * 迭代器
+	 * 提供一种方法顺序访问一个聚合对象中各个元素，而又需要暴露该对象的内部表示
+	 * 适用性
+	 *   访问一个聚合对象的内容而无需暴露它的内部表示
+	 *   支持对聚合对象的多种遍历
+	 *   为遍历不同的聚合结构提供一个统一的接口
+	 */
+
+	ConcreteAggregate* pName = new ConcreteAggregate();
+	if (NULL != pName) {
+		pName->Push("Hello");
+		pName->Push("World");
+		pName->Push("jss");
+	}
+
+	Iterator* iter = NULL;
+	iter = pName->CreateIterator();
+	if (NULL != iter) {
+		string strItem = iter->First();
+		while (!iter->IsEnd()) {
+			cout<<iter->GetCur()<<" is ok"<<endl;
+			iter->Next();
+		}
+	}
 
 	return 0;
 }

@@ -12,11 +12,11 @@
 
 class TerminalExpression: public Expression {
 private:
-	string data;
+	int i;
 public:
-	TerminalExpression(string data);
+	TerminalExpression(int i);
 	virtual ~TerminalExpression();
-	virtual bool interpret(string context);
+	virtual int interpret(Context* context);
 };
 
 #endif /* PATTERN_EXPRESSION_TERMINALEXPRESSION_H_ */
