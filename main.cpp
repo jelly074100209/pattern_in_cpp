@@ -70,6 +70,9 @@
 #include "pattern/mediator/ConcreteColleague1.h"
 #include "pattern/mediator/ConcreteColleague2.h"
 
+#include "pattern/memento/Originator.h"
+#include "pattern/memento/Caretaker.h"
+
 using namespace std;
 
 /**
@@ -369,6 +372,23 @@ int main() {
 
 	c1->Send("吃饭了吗？");
 	c2->Send("吃了");
+
+	/**
+	 * 备忘录模式
+	 * 在不破坏封装性的前提下，捕获一个对象的内部状态，并在该对象之外保存此状态，这样就可以将该对象恢复到原先状态
+	 * 适用性
+	 *   必须保存一个对象在某一时刻的（部分）状态，这样以后需要它才能恢复到原先状态
+	 *   如果一个用接口来让其它对象得到这些状态，将会暴露对象的实现细节并破坏对象的封装性
+	 */
+	Originator *originator = new Originator();
+	originator->setState(2);
+	cout<<"state is: "<<originator->getState()<<endl;
+	Caretaker *caretaker = new Caretaker();
+	caretaker->setMemento(originator->CreateMeneto());
+	originator->setState(3);
+	cout<<"new state is: "<<originator->getState()<<endl;
+	originator->SetMemento(caretaker->getMemento());
+	cout<<"last state is: "<<originator->getState()<<endl;
 
 	return 0;
 }
