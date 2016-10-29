@@ -14,5 +14,9 @@ ProductB1::ProductB1() {
 
 ProductB1::~ProductB1() {
 	// TODO Auto-generated destructor stub
+	cout<<"ProductB1 destructor"<<endl;
 }
 
+void ProductB1::display() {
+	cout<<"ProductB1"<<endl;
+}

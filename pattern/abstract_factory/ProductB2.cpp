@@ -16,3 +16,6 @@ ProductB2::~ProductB2() {
 	// TODO Auto-generated destructor stub
 }
 
+void ProductB2::display() {
+	cout<<"ProductB2"<<endl;
+}

@@ -14,5 +14,6 @@ AbstractProductB::AbstractProductB() {
 
 AbstractProductB::~AbstractProductB() {
 	// TODO Auto-generated destructor stub
+	cout<<"AbstractProductB1 destructor"<<endl;
 }
 

@@ -95,8 +95,11 @@ int main() {
 	 */
 	AbstractFactory *factory = new ConcreteFactory1();
 	AbstractProductA *productA1 = factory->CreateProductA();
+	AbstractProductB *productB1 = factory->CreateProductB();
 	productA1->display();
+	productB1->display();
 	delete productA1;
+	delete productB1;
 	delete factory;
 
 	/**

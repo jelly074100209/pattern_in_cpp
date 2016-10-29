@@ -14,6 +14,7 @@ class ProductB2: public AbstractProductB {
 public:
 	ProductB2();
 	virtual ~ProductB2();
+	virtual void display();
 };
 
 #endif /* PATTERN_PRODUCTB2_H_ */
