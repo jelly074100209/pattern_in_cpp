@@ -70,6 +70,31 @@
 #include "pattern/mediator/ConcreteColleague1.h"
 #include "pattern/mediator/ConcreteColleague2.h"
 
+#include "pattern/memento/Originator.h"
+#include "pattern/memento/Caretaker.h"
+
+#include "pattern/observer/ConcreteSubjector.h"
+#include "pattern/observer/Subjector.h"
+#include "pattern/observer/Observer.h"
+#include "pattern/observer/ConcreteObserver.h"
+
+#include "pattern/state/Request.h"
+#include "pattern/state/GetState.h"
+
+#include "pattern/strategy/StrategyContext.h"
+#include "pattern/strategy/ConcreteStrategyA.h"
+#include "pattern/strategy/ConcreteStrategyB.h"
+#include "pattern/strategy/Strategy.h"
+
+#include "pattern/template/TemplateMethod.h"
+#include "pattern/template/ConcreteTemplateMethod.h"
+
+#include "pattern/visitor/ObjectStructure.h"
+#include "pattern/visitor/ConcreteElementA.h"
+#include "pattern/visitor/ConcreteElementB.h"
+#include "pattern/visitor/ConcreteVisitor1.h"
+#include "pattern/visitor/ConcreteVisitor2.h"
+
 using namespace std;
 
 /**
@@ -374,6 +399,94 @@ int main() {
 	c1->Send("吃饭了吗？");
 	c2->Send("吃了");
 
+	/**
+	 * 备忘录模式
+	 * 在不破坏封装性的前提下，捕获一个对象的内部状态，并在该对象之外保存此状态，这样就可以将该对象恢复到原先状态
+	 * 适用性
+	 *   必须保存一个对象在某一时刻的（部分）状态，这样以后需要它才能恢复到原先状态
+	 *   如果一个用接口来让其它对象得到这些状态，将会暴露对象的实现细节并破坏对象的封装性
+	 */
+	Originator *originator = new Originator();
+	originator->setState(2);
+	cout<<"state is: "<<originator->getState()<<endl;
+	Caretaker *caretaker = new Caretaker();
+	caretaker->setMemento(originator->CreateMeneto());
+	originator->setState(3);
+	cout<<"new state is: "<<originator->getState()<<endl;
+	originator->SetMemento(caretaker->getMemento());
+	cout<<"last state is: "<<originator->getState()<<endl;
+
+	/**
+	 * 观察者模式
+	 * 定义对象间一种一对多的依赖关系，当一个对象的状态发生改变时，所有依赖于它的对象都得到通知并被自动更新
+	 * 适用性
+	 *   当一个抽象模型有两个方面，其中一个方面依赖于另一方面。将这二者封装在独立的对象中以使它们可以各自独立地改变和复用
+	 *   当对一个对象必须通知其它对象，而它又不能假定其它对象是谁。换言之，你不希望这些对象是紧密耦合的
+	 */
+	Observer *observer = new ConcreteObserver();
+	Subjector *subjector = new ConcreteSubjector();
+	subjector->Attach(observer);
+	subjector->Notify();
+
+	/**
+	 * 状态模式
+	 * 允许一个对象在其内部状态改变时改变它的行为。对象看起来似乎修改了它的类
+	 * 适用性
+	 *   一个对象的行为取决于它的状态，并且它必须在运行时刻根据状态改变它的行为
+	 *   一个操作中含有庞大的多分支的条件语句，且这些分支依赖于该对象的状态。这个状态通常用一个或多个枚举常量表示。
+	 *   通常，有多个操作包含这一相同的条件结构。State模式将每一个条件分支放入一个独立的类中。这使得你可以根据对象
+	 *   自身的情况将对象的状态作为一个对象，这一对象可以不依赖于其他对象而独立变化。
+	 */
+	Request* request = new Request(new GetState());
+	request->Start();
+	request->Start();
+	request->Start();
+
+	/**
+	 * 策略模式
+	 * 定义一系列的算法，把它们一个个封装起来，并且使它们可相互替换。本模式使得算法可独立于使用它的客户而变化。
+	 * 适用性
+	 * 	 许多相关的类仅仅是行为有异。"策略"提供了一种用多个行为中的一个行为来配置一个类的方法。
+	 * 	 需要使用一个算法的不同变体。
+	 * 	 算法使用客户不应该知道的数据。可使用策略模式以避免暴露复杂的、与算法相关的数据结构
+	 * 	 一个类定义了多种行为，并且这些行为在这个类的操作中以多个条件语句的形式出现。将相碰的条件分支移入它们各自的strategy类中以代替这些条件语句
+	 */
+	Strategy *strategyA = new ConcreteStrategyA();
+	Strategy *strategyB = new ConcreteStrategyB();
+	StrategyContext *strategyContextA = new StrategyContext(strategyA);
+	StrategyContext *strategyContextB = new StrategyContext(strategyB);
+	strategyContextA->ContextInterface();
+	strategyContextB->ContextInterface();
+
+	/**
+	 * 模板方法模式
+	 * 定义一个操作中的算法骨架，而将一些步骤延迟到子类中。TemplateMethod使得子类可以不改变一个算法的结构即可重定义该算法的某些特定步骤
+	 * 适用性
+	 *   一次性实现一个算法的不变部分，并将可变行为留给子类来实现。
+	 *   各子类中公共的行为应被提取出来并集中到一个公共父类中以避免代码重复
+	 *   控制子类扩展。模板方法只在特定点调用"hook"操作，这样只允许在这些点进行扩展
+	 */
+	TemplateMethod *templateMethod = new ConcreteTemplateMethod();
+	templateMethod->TemplateAlgorithm();
+
+	/**
+	 * 访问者模式
+	 * 表示一个作用于某对象结构的各元素的操作。它使你可以在不改变各元素的类的前提下定义作用于这些元素的新操作
+	 * 适用性
+	 *   一个对象结构包含很多类对象，它们有不同的接口，而你想对这些对象实施一些依赖于其具体类的操作
+	 *   需要对一个对象结构中的对象进行很多不同的并且不相关的操作，而你想避免让这些操作"污染"这些对象的类。
+	 *   visitor使得你可以将相关的操作集中起来定义在一个类中。当该对象结构被很多应用共享时，用Visitor模式让
+	 *   每个应用仅包含需要用到的操作
+	 *   定义对象结构的类很少改变，但经常需要在此结构上定义新的操作。改变对象结构类需要重定义对所有访问者的接口，
+	 *   这可能需要很大的代价。如果对象结构类经常改变，那么可能还是在这些类中定义这些操作比较好。
+	 */
+	ObjectStructure *o = new ObjectStructure();
+	o->Attach(new ConcreteElementA());
+	o->Attach(new ConcreteElementB());
+	Visitor *v1 = new ConcreteVisitor1();
+	Visitor *v2 = new ConcreteVisitor2();
+	o->Accept(v1);
+	o->Accept(v2);
 	return 0;
 }
 
