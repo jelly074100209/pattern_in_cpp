@@ -99,6 +99,7 @@ int main() {
 	productA1->display();
 	productB1->display();
 	delete productA1;
+
 	delete productB1;
 	delete factory;
 
