@@ -9,13 +9,14 @@
 #define PATTERN_ABSTRACTFACTORY_H_
 #include "AbstractProductA.h"
 #include "AbstractProductB.h"
+#include <memory>
 class AbstractFactory {
 public:
 	AbstractFactory();
 	virtual ~AbstractFactory();
 
-	virtual AbstractProductA *CreateProductA() = 0;
-	virtual AbstractProductB *CreateProductB() = 0;
+	virtual std::shared_ptr<AbstractProductA> CreateProductA() = 0;
+	virtual std::shared_ptr<AbstractProductB> CreateProductB() = 0;
 };
 
 #endif /* PATTERN_ABSTRACTFACTORY_H_ */

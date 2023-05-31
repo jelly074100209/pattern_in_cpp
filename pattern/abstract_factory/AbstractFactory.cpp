@@ -8,12 +8,10 @@
 #include "AbstractFactory.h"
 
 AbstractFactory::AbstractFactory() {
-	// TODO Auto-generated constructor stub
-
+	std::cout<<"AbstractFactory() called"<<std::endl;
 }
 
 AbstractFactory::~AbstractFactory() {
-	// TODO Auto-generated destructor stub
-	cout<<"AbstractFactory destructor"<<endl;
+	std::cout<<"~AbstractFactory() called"<<std::endl;
 }
 

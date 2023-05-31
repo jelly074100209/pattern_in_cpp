@@ -8,7 +8,7 @@
 #ifndef PATTERN_FACTORY_METHOD_MYSQLDB_H_
 #define PATTERN_FACTORY_METHOD_MYSQLDB_H_
 
-#include "DB.h"
+#include "DBInterface.h"
 #include "mysql.h"
 
 class MysqlDB: public DB {

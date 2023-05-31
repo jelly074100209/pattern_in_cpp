@@ -9,18 +9,17 @@
 #include "ProductA1.h"
 #include "ProductB1.h"
 ConcreteFactory1::ConcreteFactory1() {
-	// TODO Auto-generated constructor stub
-
+	std::cout<<"ConcreteFactory1 called"<<endl;
 }
 
 ConcreteFactory1::~ConcreteFactory1() {
-	// TODO Auto-generated destructor stub
+    std::cout<<"~ConcreteFactory1 called"<<endl;
 }
 
-AbstractProductA* ConcreteFactory1::CreateProductA() {
-	return new ProductA1();
+std::shared_ptr<AbstractProductA> ConcreteFactory1::CreateProductA() {
+	return std::make_shared<ProductA1>();
 }
 
-AbstractProductB* ConcreteFactory1::CreateProductB() {
-	return new ProductB1();
+std::shared_ptr<AbstractProductB> ConcreteFactory1::CreateProductB() {
+	return std::make_shared<ProductB1>();
 }

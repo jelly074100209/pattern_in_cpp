@@ -1,21 +1,18 @@
 /*
- * MongoDB.cpp
+ * DB.cpp
  *
  *  Created on: 2016年10月19日
  *      Author: JSS
  */
 
-#include "MongoDB.h"
+#include "DBInterface.h"
 
-MongoDB::MongoDB() {
+DBInterface::DBInterface() {
 	// TODO Auto-generated constructor stub
 
 }
 
-MongoDB::~MongoDB() {
+DBInterface::~DBInterface() {
 	// TODO Auto-generated destructor stub
 }
 
-database* MongoDB::createDB() {
-	return new mongo();
-}

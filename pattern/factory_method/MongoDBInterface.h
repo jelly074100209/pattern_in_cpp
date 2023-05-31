@@ -8,12 +8,12 @@
 #ifndef PATTERN_FACTORY_METHOD_MONGODB_H_
 #define PATTERN_FACTORY_METHOD_MONGODB_H_
 
-#include "DB.h"
+#include "DBInterface.h"
 #include "mongo.h"
-class MongoDB: public DB {
+class MongoDBInterface: public DBInterface {
 public:
-	MongoDB();
-	virtual ~MongoDB();
+	MongoDBInterface();
+	virtual ~MongoDBInterface();
 	virtual database* createDB();
 };
 

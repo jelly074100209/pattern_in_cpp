@@ -10,12 +10,12 @@
 
 #include "database.h"
 
-class DB {
+class DBInterface {
 private:
 	database *db;
 public:
-	DB();
-	virtual ~DB();
+    DBInterface();
+	virtual ~DBInterface();
 	virtual database* createDB() = 0;
 };
 

@@ -9,14 +9,15 @@
 #define PATTERN_CONCRETEFACTORY1_H_
 
 #include "AbstractFactory.h"
+#include <memory>
 
 class ConcreteFactory1: public AbstractFactory {
 public:
 	ConcreteFactory1();
-	virtual ~ConcreteFactory1();
+	~ConcreteFactory1() override;
 
-	virtual AbstractProductA* CreateProductA();
-	virtual AbstractProductB* CreateProductB();
+	std::shared_ptr<AbstractProductA> CreateProductA() override;
+	std::shared_ptr<AbstractProductB> CreateProductB() override;
 };
 
 #endif /* PATTERN_CONCRETEFACTORY1_H_ */

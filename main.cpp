@@ -21,8 +21,8 @@
 #include "pattern/builder/Director.h"
 
 #include "pattern/factory_method/database.h"
-#include "pattern/factory_method/DB.h"
-#include "pattern/factory_method/MongoDB.h"
+#include "pattern/factory_method/DBInterface.h"
+#include "pattern/factory_method/MongoDBInterface.h"
 #include "pattern/factory_method/MysqlDB.h"
 
 #include "pattern/prototype/prototype.h"
@@ -109,24 +109,6 @@ using namespace std;
  */
 
 int main() {
-	/**
-	 * 抽象工厂
-	 * 提供一个创建一系列相关或相互依赖对象的接口，而无需指定它们具体的类（里氏替换原则）
-	 * 适用性
-	 *   一个系统要独立于它的产品的创建、组合和表示时
-	 *   一个系统要由多个产品系列中的一个来配置时
-	 *   当你要强调一系列相关的产品对象的设计以便进行联合使用时
-	 *   当你提供一个产品类库，而只想显示它们的接口而不是实现时
-	 */
-	AbstractFactory *factory = new ConcreteFactory1();
-	AbstractProductA *productA1 = factory->CreateProductA();
-	AbstractProductB *productB1 = factory->CreateProductB();
-	productA1->display();
-	productB1->display();
-	delete productA1;
-
-	delete productB1;
-	delete factory;
 
 	/**
 	 * 单例模式
@@ -396,8 +378,8 @@ int main() {
 	ConcreteColleague1 *c1 = new ConcreteColleague1(m);
 	ConcreteColleague2 *c2 = new ConcreteColleague2(m);
 
-	c1->Send("吃饭了吗？");
-	c2->Send("吃了");
+	c1->Send("have eating?");
+	c2->Send("yes");
 
 	/**
 	 * 备忘录模式

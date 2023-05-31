@@ -8,12 +8,10 @@
 #include "AbstractProductB.h"
 
 AbstractProductB::AbstractProductB() {
-	// TODO Auto-generated constructor stub
-
+    std::cout<<"AbstractProductB() called"<<std::endl;
 }
 
 AbstractProductB::~AbstractProductB() {
-	// TODO Auto-generated destructor stub
-	cout<<"AbstractProductB1 destructor"<<endl;
+	std::cout<<"~AbstractProductB() called"<<std::endl;
 }
 

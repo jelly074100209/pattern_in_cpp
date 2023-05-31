@@ -13,8 +13,8 @@
 class ProductB1: public AbstractProductB {
 public:
 	ProductB1();
-	virtual ~ProductB1();
-	virtual void display();
+    ~ProductB1() override;
+    void display() override;
 };
 
 #endif /* PATTERN_PRODUCTB1_H_ */

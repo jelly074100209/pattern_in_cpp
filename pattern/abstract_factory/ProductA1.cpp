@@ -8,13 +8,11 @@
 #include "ProductA1.h"
 
 ProductA1::ProductA1() {
-	// TODO Auto-generated constructor stub
-
+	cout<<"ProductA1() called"<<endl;
 }
 
 ProductA1::~ProductA1() {
-	// TODO Auto-generated destructor stub
-	cout<<"ProductA1 destructor"<<endl;
+	cout<<"~ProductA1() called"<<endl;
 }
 
 void ProductA1::display() {

@@ -9,7 +9,6 @@
 #define PATTERN_ABSTRACTPRODUCTB_H_
 
 #include <iostream>
-using namespace std;
 
 class AbstractProductB {
 public:

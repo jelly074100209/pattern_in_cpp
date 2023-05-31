@@ -13,10 +13,10 @@
 class ConcreteFactory2: public AbstractFactory {
 public:
 	ConcreteFactory2();
-	virtual ~ConcreteFactory2();
+	~ConcreteFactory2() override;
 
-	virtual AbstractProductA *CreateProductA();
-	virtual AbstractProductB *CreateProductB();
+	shared_ptr<AbstractProductA> CreateProductA() override;
+	shared_ptr<AbstractProductB> CreateProductB() override;
 };
 
 #endif /* PATTERN_CONCRETEFACTORY2_H_ */
