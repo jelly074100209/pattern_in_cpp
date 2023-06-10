@@ -6,23 +6,23 @@
  */
 
 #include "Singleton.h"
-#ifndef NULL
-const int NULL = 0;
-#endif
-
-Singleton* Singleton::_instance = NULL;
+std::shared_ptr<Singleton> Singleton::_instance = nullptr;
 
 Singleton::Singleton() {
-	// TODO Auto-generated constructor stub
+	std::cout<<"Singleton() called"<<std::endl;
 }
 
 Singleton::~Singleton() {
-	// TODO Auto-generated destructor stub
+	std::cout<<"~Singleton() called"<<std::endl;
 }
 
-Singleton* Singleton::getInstance() {
-	if (_instance == 0) {
-		_instance = new Singleton();
+std::shared_ptr<Singleton> Singleton::getInstance() {
+	if (_instance == nullptr) {
+		_instance = std::make_shared<Singleton>();
 	}
 	return _instance;
+}
+
+void Singleton::display() {
+    std::cout<<"singleton display"<<std::endl;
 }

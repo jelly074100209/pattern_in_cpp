@@ -1,2 +1,2 @@
 aux_source_directory(./ SRC)
-add_executable(singleton ${SRC})
+add_executable(singleton ${SRC} main.cpp)
